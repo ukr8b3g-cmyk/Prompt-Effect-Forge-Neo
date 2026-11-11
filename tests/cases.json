@@ -1,0 +1,382 @@
+{
+  "schema_version": 1,
+  "description": "Independent hand-authored edge-case expectations for the proposed Forge adaptation.",
+  "splice": [
+    {
+      "id": "empty",
+      "base": "",
+      "start": 0,
+      "end": 0,
+      "text": "F",
+      "expected": {
+        "changed": true,
+        "value": "F",
+        "caret": 1,
+        "reason": "ok"
+      }
+    },
+    {
+      "id": "append",
+      "base": "base",
+      "start": 4,
+      "end": 4,
+      "text": "F",
+      "expected": {
+        "changed": true,
+        "value": "base\nF",
+        "caret": 6,
+        "reason": "ok"
+      }
+    },
+    {
+      "id": "prepend",
+      "base": "base",
+      "start": 0,
+      "end": 0,
+      "text": "F",
+      "expected": {
+        "changed": true,
+        "value": "F\nbase",
+        "caret": 1,
+        "reason": "ok"
+      }
+    },
+    {
+      "id": "middle",
+      "base": "leftRIGHT",
+      "start": 4,
+      "end": 4,
+      "text": "F",
+      "expected": {
+        "changed": true,
+        "value": "left\nF\nRIGHT",
+        "caret": 6,
+        "reason": "ok"
+      }
+    },
+    {
+      "id": "replace_selection",
+      "base": "before OLD after",
+      "start": 7,
+      "end": 10,
+      "text": "F",
+      "expected": {
+        "changed": true,
+        "value": "before F after",
+        "caret": 8,
+        "reason": "ok"
+      }
+    },
+    {
+      "id": "replace_all",
+      "base": "old",
+      "start": 0,
+      "end": 3,
+      "text": "F",
+      "expected": {
+        "changed": true,
+        "value": "F",
+        "caret": 1,
+        "reason": "ok"
+      }
+    },
+    {
+      "id": "existing_comma",
+      "base": "left, right",
+      "start": 5,
+      "end": 5,
+      "text": "F",
+      "expected": {
+        "changed": true,
+        "value": "left, F right",
+        "caret": 7,
+        "reason": "ok"
+      }
+    },
+    {
+      "id": "existing_newline",
+      "base": "base\n",
+      "start": 5,
+      "end": 5,
+      "text": "F",
+      "expected": {
+        "changed": true,
+        "value": "base\nF",
+        "caret": 6,
+        "reason": "ok"
+      }
+    },
+    {
+      "id": "preserve_outer_space",
+      "base": "  base  ",
+      "start": 8,
+      "end": 8,
+      "text": "F",
+      "expected": {
+        "changed": true,
+        "value": "  base  F",
+        "caret": 9,
+        "reason": "ok"
+      }
+    },
+    {
+      "id": "remove_inserted_edge_commas",
+      "base": "left, ,right",
+      "start": 6,
+      "end": 6,
+      "text": ", F,",
+      "expected": {
+        "changed": true,
+        "value": "left, F,right",
+        "caret": 7,
+        "reason": "ok"
+      }
+    },
+    {
+      "id": "multiline_effect",
+      "base": "base",
+      "start": 4,
+      "end": 4,
+      "text": "F\nG",
+      "expected": {
+        "changed": true,
+        "value": "base\nF\nG",
+        "caret": 8,
+        "reason": "ok"
+      }
+    },
+    {
+      "id": "trim_fragment_only",
+      "base": "base",
+      "start": 4,
+      "end": 4,
+      "text": " F ",
+      "expected": {
+        "changed": true,
+        "value": "base\nF",
+        "caret": 6,
+        "reason": "ok"
+      }
+    },
+    {
+      "id": "empty_fragment",
+      "base": "base",
+      "start": 4,
+      "end": 4,
+      "text": "  ",
+      "expected": {
+        "changed": false,
+        "value": "base",
+        "caret": null,
+        "reason": "empty_effect"
+      }
+    },
+    {
+      "id": "negative_start",
+      "base": "base",
+      "start": -1,
+      "end": 4,
+      "text": "F",
+      "expected": {
+        "changed": false,
+        "value": "base",
+        "caret": null,
+        "reason": "invalid_range"
+      }
+    },
+    {
+      "id": "reversed_range",
+      "base": "base",
+      "start": 3,
+      "end": 1,
+      "text": "F",
+      "expected": {
+        "changed": false,
+        "value": "base",
+        "caret": null,
+        "reason": "invalid_range"
+      }
+    },
+    {
+      "id": "out_of_bounds",
+      "base": "base",
+      "start": 5,
+      "end": 5,
+      "text": "F",
+      "expected": {
+        "changed": false,
+        "value": "base",
+        "caret": null,
+        "reason": "invalid_range"
+      }
+    },
+    {
+      "id": "invalid_text_type",
+      "base": "base",
+      "start": 4,
+      "end": 4,
+      "text": null,
+      "expected": {
+        "changed": false,
+        "value": "base",
+        "caret": null,
+        "reason": "invalid_type"
+      }
+    },
+    {
+      "id": "json_at_end",
+      "base": "{\"a\":1}",
+      "start": 7,
+      "end": 7,
+      "text": "F",
+      "expected": {
+        "changed": true,
+        "value": "{\"a\":1}\nF",
+        "caret": 9,
+        "reason": "ok"
+      }
+    }
+  ],
+  "effect": [
+    {
+      "id": "default",
+      "state": {},
+      "expected": {
+        "preview": "photorealistic image, natural lighting, realistic skin texture, lifelike details, accurate materials, clean high-resolution photo quality",
+        "insertable": true,
+        "reason": "ok"
+      }
+    },
+    {
+      "id": "source_photo_boost",
+      "state": {
+        "styleBoost": "Photo"
+      },
+      "expected": {
+        "preview": "photorealistic image, natural lighting, realistic skin texture, lifelike details, accurate materials, clean high-resolution photo quality, natural photo look, realistic lighting, real-world materials, camera-based detail",
+        "insertable": true,
+        "reason": "ok"
+      }
+    },
+    {
+      "id": "source_anime_boost_full",
+      "state": {
+        "styleBoost": "Anime"
+      },
+      "expected": {
+        "preview": "photorealistic image, natural lighting, realistic skin texture, lifelike details, accurate materials, clean high-resolution photo quality, anime style, clean linework, cel-shaded color, illustrated character look",
+        "insertable": true,
+        "reason": "ok"
+      }
+    },
+    {
+      "id": "disabled_keeps_preview",
+      "state": {
+        "enabled": false
+      },
+      "expected": {
+        "preview": "photorealistic image, natural lighting, realistic skin texture, lifelike details, accurate materials, clean high-resolution photo quality",
+        "insertable": false,
+        "reason": "disabled"
+      }
+    },
+    {
+      "id": "string_false_not_true",
+      "state": {
+        "enabled": "false"
+      },
+      "expected": {
+        "preview": "photorealistic image, natural lighting, realistic skin texture, lifelike details, accurate materials, clean high-resolution photo quality",
+        "insertable": false,
+        "reason": "disabled"
+      }
+    },
+    {
+      "id": "custom_raw",
+      "state": {
+        "mode": "Custom",
+        "customDraft": "  A\nB  "
+      },
+      "expected": {
+        "preview": "A\nB",
+        "insertable": true,
+        "reason": "ok"
+      }
+    },
+    {
+      "id": "empty_custom",
+      "state": {
+        "mode": "Custom",
+        "customDraft": ""
+      },
+      "expected": {
+        "preview": "",
+        "insertable": false,
+        "reason": "empty_effect"
+      }
+    },
+    {
+      "id": "boost_only_custom",
+      "state": {
+        "mode": "Custom",
+        "customDraft": "",
+        "styleBoost": "Anime"
+      },
+      "expected": {
+        "preview": "anime style, clean linework, cel-shaded color, illustrated character look",
+        "insertable": true,
+        "reason": "ok"
+      }
+    },
+    {
+      "id": "boost_not_duplicated",
+      "state": {
+        "mode": "Custom",
+        "customDraft": "NATURAL PHOTO LOOK, REALISTIC LIGHTING, REAL-WORLD MATERIALS, CAMERA-BASED DETAIL",
+        "styleBoost": "Photo"
+      },
+      "expected": {
+        "preview": "NATURAL PHOTO LOOK, REALISTIC LIGHTING, REAL-WORLD MATERIALS, CAMERA-BASED DETAIL",
+        "insertable": true,
+        "reason": "ok"
+      }
+    },
+    {
+      "id": "unknown_preset",
+      "state": {
+        "selectedPresetId": "missing"
+      },
+      "expected": {
+        "preview": "",
+        "insertable": false,
+        "reason": "unknown_preset"
+      }
+    },
+    {
+      "id": "unknown_builtin_does_not_block_custom",
+      "state": {
+        "mode": "Custom",
+        "selectedPresetId": "missing",
+        "customDraft": "custom"
+      },
+      "expected": {
+        "preview": "custom",
+        "insertable": true,
+        "reason": "ok"
+      }
+    },
+    {
+      "id": "computed_photo_does_not_pollute_raw",
+      "state": {
+        "mode": "Custom",
+        "customDraft": "raw",
+        "styleBoost": "Anime"
+      },
+      "expected": {
+        "preview": "raw, anime style, clean linework, cel-shaded color, illustrated character look",
+        "insertable": true,
+        "reason": "ok"
+      }
+    }
+  ]
+}

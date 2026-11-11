@@ -1,0 +1,10 @@
+# Local validation records and browser fixtures
+/docs/CONTROL_AUDIT.ja.md
+/docs/VALIDATION.ja.md
+/tests/artifacts/
+/tests/*-live.cjs
+/tests/live.cjs
+/tests/browser.cjs
+/tests/cdp.cjs
+/tools/artifacts/
+__pycache__/
