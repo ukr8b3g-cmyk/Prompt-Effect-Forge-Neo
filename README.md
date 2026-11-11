@@ -6,9 +6,26 @@ Krea2 BBOX Prompt Effectのプリセット176件と見本画像176枚を、Forge
 
 ## 導入
 
+### Forge Neo の画面からインストール
+
+1. Forge Neo で **Extensions → Install from URL** を開きます。
+2. **URL for extension's git repository** に、次の URL を貼り付けます。
+
+   ```text
+   https://github.com/ukr8b3g-cmyk/Prompt-Effect-Forge-Neo.git
+   ```
+
+3. **Specific branch name** は空欄のまま、**Local directory name** に `prompt-effect-forge-neo` を入力して **Install** を押します。
+4. インストールが完了したら、**Installed → Apply and restart UI** を押します。**Apply and quit** と表示される場合は、終了後に Forge Neo を起動します。
+5. 再起動後、**Prompt Effect** タブ、または txt2img／img2img の **Prompt Effect** バーを開きます。
+
+### ZIP からインストール
+
 1. [Releases](https://github.com/ukr8b3g-cmyk/Prompt-Effect-Forge-Neo/releases) からインストール用ZIPをダウンロードします。
-2. ZIPを展開し、`prompt-effect-forge-neo` フォルダーをForge Neoの `extensions` に入れます。
-3. Forge NeoのUIを再起動します。追加パッケージやモデルの導入は不要です。
+2. ZIPを展開し、`prompt-effect-forge-neo` フォルダーを Forge Neo の `extensions` に入れます。
+3. Forge Neo の UI を再起動します。
+
+どちらの方法でも、追加のパッケージやモデルは不要です。
 
 ## 操作
 
@@ -55,12 +72,29 @@ node --test tests/core.test.cjs tests/transport.test.cjs tests/library.test.cjs 
 
 An independent Forge Neo extension containing the original 176 Krea2 Prompt Effect presets and preview images. Select an effect, inspect its preview, and explicitly insert it into the txt2img or img2img Positive prompt. It supports a regular tab, side panel and linked browser tab, exclusive Photo/Anime Boost, browser-stored Custom presets, and JSON import/export. It does not append text on Generate. Disable blocks future insertions and keeps your edits.
 
+### Installation
+
+1. Open **Extensions → Install from URL** in Forge Neo.
+2. Paste the following URL into **URL for extension's git repository**.
+
+   ```text
+   https://github.com/ukr8b3g-cmyk/Prompt-Effect-Forge-Neo.git
+   ```
+
+3. Leave **Specific branch name** blank, enter `prompt-effect-forge-neo` in **Local directory name**, and click **Install**.
+4. After installation, go to **Installed → Apply and restart UI**. If the button says **Apply and quit**, launch Forge Neo again after it closes.
+5. Open the **Prompt Effect** tab or the **Prompt Effect** bar in txt2img or img2img.
+
+For a manual installation, download the install ZIP from [Releases](https://github.com/ukr8b3g-cmyk/Prompt-Effect-Forge-Neo/releases), extract its `prompt-effect-forge-neo` folder into Forge Neo's `extensions` directory, and restart the UI.
+
+Both methods use the bundled assets and require no additional packages or models.
+
 The outer Enable controls insertion for the extension. The regular tab, side panel and browser picker contain only Enable Style Boost, which controls the optional Photo/Anime phrase. Turning Boost off leaves the base effect insertable when the extension is enabled. The two states synchronize and persist independently; re-enabling Boost restores its last choice.
 
 Use each card's Favorite/Favorited button to add or remove favorites. All/Recent/Favorites is the order in the regular tab, side panel and browser tab, following the Background Prompter layout. Recent shows the 20 most recently selected effects without duplicates. Favorites and history include saved Custom presets, persist in this browser/origin/base path, and synchronize across tabs. They are separate from Custom JSON exports.
 
 Every view opens with Search empty, All categories selected, and the All filter active. Returning to the regular tab, reopening the side panel, or opening/reloading a browser picker starts with all effects. Each view owns its browsing conditions, so another view's search/category is not reapplied during connection or synchronization.
 
-Download the install ZIP from [Releases](https://github.com/ukr8b3g-cmyk/Prompt-Effect-Forge-Neo/releases), extract its `prompt-effect-forge-neo` folder into Forge Neo's `extensions` directory, and restart the UI. No additional dependencies are required. Custom data belongs to the browser profile, origin and base path; export JSON to move it. Reconnect a picker after reloading the original WebUI. A timed-out insertion is never retried automatically; check the original prompt first.
+Custom data belongs to the browser profile, origin and base path; export JSON to move it. Reconnect a picker after reloading the original WebUI. A timed-out insertion is never retried automatically; check the original prompt first.
 
 See [NOTICE](NOTICE.md) for fixed upstream sources and asset provenance.
