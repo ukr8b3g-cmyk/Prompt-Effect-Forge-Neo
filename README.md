@@ -1,4 +1,6 @@
 # Prompt Effect Forge Neo
+<img width="1808" height="903" alt="Clip_7" src="https://github.com/user-attachments/assets/69b8b2c3-e97b-4936-b534-8fd7a5ca9801" />
+
 
 Krea2 BBOX Prompt Effectのプリセット176件と見本画像176枚を、Forge Neoで選んでPositiveへ挿入する独立拡張です。元の英語効果文・Boost・画像を保持しています。日本語／英語の表示に対応します。
 
