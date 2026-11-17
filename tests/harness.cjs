@@ -10,7 +10,7 @@ const instrumented = source.replace("// PEF_TEST_SEAM", `globalThis.__pef = {
     composeEffect, splicePrompt, insertEffect, validateCustom, normalizeState, resolveExtensionBase,
     validateCatalog, assetUrl, loadCustomRecords, saveCustomRecord, planImport, importCustomPresets, exportCustomPresets,
     customDirty, insertIntoPrompt, handleMessage, requestInsert, reconnectHost, receiveState, snapshot, commit,
-    ensureMounts, renderAll, loadCatalog, openDrawer, closeDrawer, loadCustom, detachMissingCustom, dispose,
+    installGenerationPrompt, ensureMounts, renderAll, loadCatalog, openDrawer, closeDrawer, loadCustom, detachMissingCustom, dispose,
     keys, instanceId, session, scope, isStandalone, transport, setStyleBoostEnabled,
     toggleFavorite, isFavorite, recentLibraryIds, libraryItems, selectPreset, recordLibraryOperation, receiveLibraryOperation, readLibraryOperations,
     get state() { return state; }, get revision() { return revision; }, get connected() { return connected; },

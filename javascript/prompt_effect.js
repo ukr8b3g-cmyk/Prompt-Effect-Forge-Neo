@@ -408,6 +408,52 @@
     }
 
     function appRoot() { return typeof gradioApp === "function" ? gradioApp() : document; }
+    // Compose only the outgoing Positive argument. Both native and queued Generate use it.
+    function installGenerationPrompt() {
+        if (isStandalone) return;
+
+        function wrapSubmit(owner, name, target, index) {
+            const submit = owner?.[name];
+            if (typeof submit !== "function") return;
+            owner[name] = function (...args) {
+                const input = appRoot().querySelector("#" + target + "_prompt textarea");
+                // Gallery upscale also calls submit(), with a different argument layout.
+                const selection = typeof args[index] === "string" && args[index] === input?.value
+                    ? selectedGenerationPrompt() : null;
+                const result = submit.apply(this, args);
+                if (!selection) return result;
+                const apply = values => {
+                    if (Array.isArray(values) && typeof values[index] === "string") {
+                        values[index] = appendSelectedPrompt(values[index], selection);
+                    }
+                    return values;
+                };
+                return typeof result?.then === "function" ? result.then(apply) : apply(result);
+            };
+        }
+
+        wrapSubmit(window, "submit", "txt2img", 1);
+        wrapSubmit(window, "submit_img2img", "img2img", 2);
+        wrapSubmit(window.forgeGenerationQueue, "submit", "txt2img", 1);
+    }
+
+    function containsPromptSegment(prompt, text) {
+        const segments = value => value.split(/[,\r\n]+/).map(part => part.trim()).filter(Boolean);
+        const selected = segments(text).join("\n");
+        return Boolean(selected) && ("\n" + segments(prompt).join("\n") + "\n").includes("\n" + selected + "\n");
+    }
+
+    function selectedGenerationPrompt() {
+        if (!ready || !catalog || state.enabled !== true) return null;
+        const effect = composeEffect(catalog, state);
+        return effect.insertable ? effect.preview : null;
+    }
+
+    function appendSelectedPrompt(prompt, text) {
+        if (containsPromptSegment(prompt, text)) return prompt;
+        return splicePrompt(prompt, prompt.length, prompt.length, text).value;
+    }
+
     function insertIntoPrompt(target, text) {
         if (isStandalone || !ready) return { ok: false, reason: "not_ready" };
         if (state.enabled !== true) return { ok: false, reason: "disabled" };
@@ -544,7 +590,7 @@
             insert_txt2img: "Insert into txt2img", insert_img2img: "Insert into img2img", name: "Preset name", draft: "Custom text", saved: "Saved presets",
             save: "Save", save_as: "Save As", load: "Load", delete: "Delete", import: "Import JSON", export: "Export JSON", draft_copy: "Copy draft",
             storage_note: "Custom presets are stored in this browser, origin and base path. Use JSON to move them.",
-            off_note: "Insertion follows Enable on the original WebUI bar. Style Boost only adds the selected style phrase.", dirty: "Unsaved changes", clean: "Draft saved / unchanged",
+            off_note: "Enable applies this preview when generating. Insert writes it into the prompt field.", dirty: "Unsaved changes", clean: "Draft saved / unchanged",
             discard: "Replace the unsaved Custom name and text?", delete_confirm: "Delete this saved preset? Your current draft will stay.",
             new_name: "Name for a new Custom preset", no_matches: "No matching effects.", retry: "Retry loading", loading: "Loading Prompt Effect…", load_failed: "Could not load effects. Retry loading.",
             asset_base: "Could not locate this extension's script URL.", invalid_catalog: "The effect catalog is invalid.", unknown_preset: "The selected preset is missing. Select another effect.",
@@ -574,7 +620,7 @@
             insert_txt2img: "txt2imgへ挿入", insert_img2img: "img2imgへ挿入", name: "プリセット名", draft: "カスタム本文", saved: "保存済みプリセット",
             save: "保存", save_as: "別名で保存", load: "読み込み", delete: "削除", import: "JSON取り込み", export: "JSON書き出し", draft_copy: "編集中の本文をコピー",
             storage_note: "カスタムはこのブラウザー・オリジン・ベースパスに保存されます。移動にはJSONを使用します。",
-            off_note: "挿入の有効・無効は元のWebUIの外側バーで切り替えます。スタイルブーストは追加のスタイル文だけを制御します。", dirty: "未保存の変更あり", clean: "保存済み／変更なし",
+            off_note: "Enable がオンならこの効果文が生成に反映されます。挿入を押すとプロンプト欄に入力します。", dirty: "未保存の変更あり", clean: "保存済み／変更なし",
             discard: "未保存のカスタム名と本文を置き換えますか？", delete_confirm: "保存済みプリセットを削除しますか？編集中の本文は残ります。",
             new_name: "新しいカスタムプリセット名", no_matches: "条件に一致するエフェクトがありません。", retry: "再読み込み", loading: "Prompt Effectを読み込み中…", load_failed: "エフェクトを読み込めませんでした。再読み込みしてください。",
             asset_base: "拡張のスクリプトURLを特定できません。", invalid_catalog: "エフェクトのカタログが不正です。", unknown_preset: "選択したプリセットが見つかりません。選び直してください。",
@@ -1118,6 +1164,7 @@
     });
     let themeObserver=null;
     const boot = () => {
+        installGenerationPrompt();
         if(!themeObserver && typeof MutationObserver==='function' && document.body){
             themeObserver=new MutationObserver(syncSeriesAppearance);
             themeObserver.observe(document.body,{attributes:true,attributeFilter:['class']});
