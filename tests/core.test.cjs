@@ -6,7 +6,7 @@ const { createHub, catalog, plain } = require("./harness.cjs");
 const cases = require("./cases.json"), golden = require("./source_effect_golden.json");
 const { api } = createHub().page();
 for (const row of cases.splice) test(`insertion: ${row.id}`, () => assert.deepEqual(plain(api.splicePrompt(row.base, row.start, row.end, row.text)), row.expected));
-for (const row of cases.effect) test(`effect: ${row.id}`, () => assert.deepEqual(plain(api.composeEffect(catalog, { ...api.state, ...row.state })), row.expected));
+for (const row of cases.effect) test(`effect: ${row.id}`, () => assert.deepEqual(plain(api.composeEffect(catalog, { ...api.state, enabled: true, ...row.state })), row.expected));
 test("528 upstream effect/boost outputs use the shipped composer", () => {
     assert.equal(golden.cases.length, 528);
     for (const row of golden.cases) assert.equal(api.composeEffect(catalog, { ...api.state, selectedPresetId: row.preset_id, styleBoost: row.style_boost }).preview, row.expected_effect);

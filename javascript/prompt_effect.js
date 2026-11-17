@@ -37,12 +37,13 @@
     const keys = {
         state: `${NS}:state:v1:${scope}:${session || instanceId}`,
         prefs: `${NS}:prefs:v1:${scope}`,
+        enabled: `${NS}:enabled:v1:${scope}`,
         custom: `${NS}:custom:v1:${scope}:`,
         library: `${NS}:library:v1:${scope}:`,
         event: `${NS}:event:v1:${scope}`,
     };
     const defaults = {
-        enabled: true, mode: "Preset", selectedPresetId: "realistic_photo", category: "All", query: "",
+        enabled: false, mode: "Preset", selectedPresetId: "realistic_photo", category: "All", query: "",
         styleBoost: "", styleBoostLast:"Photo", customName: "", customDraft: "", customPresetId: null,
         loadedCustomRevision: 0, customBaselineName: "", customBaselineText: "",
     };
@@ -149,7 +150,7 @@
         for (const key of Object.keys(defaults)) {
             if (typeof defaults[key] === "string" && typeof value[key] === "string") result[key] = value[key];
         }
-        result.enabled = value.enabled === undefined ? true : value.enabled === true;
+        result.enabled = value.enabled === true;
         result.mode = ["Preset", "Custom"].includes(value.mode) ? value.mode : "Preset";
         result.category = ["All", "Photo", "Camera FX", "Art", "Light", "Weather", "Color Theme", "Finish", "Custom"].includes(value.category) ? value.category : "All";
         result.styleBoost = ["Photo", "Anime"].includes(value.styleBoost) ? value.styleBoost : "";
@@ -272,11 +273,13 @@
     function restore() {
         if (!isStandalone) {
             try {
+                state.enabled = localStorage.getItem(keys.enabled) === "true";
                 const raw = localStorage.getItem(keys.state);
                 if (raw) {
                     const value = JSON.parse(raw);
                     if (value.schema_version !== 1 || !validRevision(value.revision) || !value.state) throw new Error("state_schema");
-                    state = normalizeState(value.state); revision = value.revision; clock = revision.counter;
+                    state = normalizeState({ enabled: state.enabled, ...value.state });
+                    revision = value.revision; clock = revision.counter;
                     for(const field of ['enabled','styleBoost']){controlRevisions[field]={...controlRevision(value,field)};clock=Math.max(clock,controlRevisions[field].counter);}
                 }
             } catch { stateWritable = false; persistenceWarning = "state_unreadable"; }
@@ -298,6 +301,7 @@
         state = normalizeState({ ...state, ...change });
         revision = { counter: Math.min(Number.MAX_SAFE_INTEGER, ++clock), actor: instanceId };
         for(const field of ['enabled','styleBoost'])if(Object.hasOwn(change,field))controlRevisions[field]={...revision};
+        if (Object.hasOwn(change, "enabled")) writeJSON(keys.enabled, state.enabled);
         persistState();
         transport.broadcast({ type: "state", snapshot: snapshot() });
         renderAll();

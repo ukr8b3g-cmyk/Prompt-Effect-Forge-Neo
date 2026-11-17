@@ -1,5 +1,21 @@
 const test=require('node:test'),assert=require('node:assert/strict');
 const {createHub,catalog}=require('./harness.cjs');
+test('A new tab restores the last explicit Enable choice for this WebUI path', () => {
+    const hub = createHub();
+    const first = hub.page();
+    assert.equal(first.api.state.enabled, false);
+    first.api.commit({ enabled: true });
+    first.api.dispose();
+
+    const next = hub.page();
+    assert.notEqual(next.api.session, first.api.session);
+    assert.equal(next.api.state.enabled, true);
+    assert.equal(hub.page({ scope: '/other' }).api.state.enabled, false);
+
+    next.api.commit({ enabled: false });
+    next.api.dispose();
+    assert.equal(hub.page().api.state.enabled, false);
+});
 for(const enabled of [true,false])for(const style of ['Photo','Anime'])test(`master ${enabled}, ${style}: Boost OFF uses raw effect, ON restores choice; neither changes the other scope`,()=>{
     const p=createHub().page(),a=p.api;a.commit({enabled,mode:'Custom',customDraft:'raw effect',styleBoost:style});
     a.setStyleBoostEnabled(false);assert.equal(a.state.enabled,enabled);assert.equal(a.state.styleBoost,'');assert.equal(a.state.styleBoostLast,style);assert.equal(a.state.customDraft,'raw effect');

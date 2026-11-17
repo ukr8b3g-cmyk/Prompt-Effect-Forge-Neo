@@ -4,6 +4,7 @@ const assert = require("node:assert/strict");
 const { createHub } = require("./harness.cjs");
 function pair(hostOptions = {}, pickerOptions = {}) {
     const hub = createHub(), host = hub.page({ session: "original", ...hostOptions });
+    host.api.setState({ enabled: true });
     const picker = hub.page({ hash: `#prompt-effect-forge-neo?host=original&page=${host.api.instanceId}`, ...pickerOptions });
     picker.api.reconnectHost(); hub.advance(350);
     return { hub, host, picker };
@@ -11,6 +12,7 @@ function pair(hostOptions = {}, pickerOptions = {}) {
 function request(host, extra = {}) { return { protocol: "prompt-effect-forge-neo", version: 1, scope: "/", session: host.api.session, source: "picker", recipient: host.api.instanceId, type: "insert-request", requestId: "r1", target: "txt2img", text: "effect", ...extra }; }
 test("direct insertion notifies Gradio, only selected prompt changes, disabled host blocks direct writes", () => {
     const host = createHub().page();
+    host.api.setState({ enabled: true });
     host.inputs.txt2img.value = "leftRIGHT"; host.inputs.txt2img.setSelectionRange(4, 4);
     assert.equal(host.api.insertIntoPrompt("txt2img", "F").ok, true);
     assert.equal(host.inputs.txt2img.value, "left\nF\nRIGHT"); assert.equal(host.inputs.txt2img.updates, 1);
@@ -76,6 +78,7 @@ test("host reload needs reconnect; duplicate session is ambiguous and close neve
 });
 test("no transport still permits direct local insertion", () => {
     const hub = createHub(), host = hub.page({ bcFailure: true }); host.control.storageFailure = true;
+    host.api.setState({ enabled: true });
     assert.equal(host.api.insertIntoPrompt("txt2img", "F").ok, true);
     const picker = hub.page({ bcFailure: true, hash: `#prompt-effect-forge-neo?host=${host.api.session}` }); picker.control.storageFailure = true;
     picker.api.reconnectHost(); assert.equal(picker.api.discovery, null); assert.equal(picker.api.pending, null);
