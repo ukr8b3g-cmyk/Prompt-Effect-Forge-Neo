@@ -2,7 +2,7 @@
 <img width="1808" height="903" alt="Clip_7" src="https://github.com/user-attachments/assets/69b8b2c3-e97b-4936-b534-8fd7a5ca9801" />
 
 
-Krea2 BBOX Prompt Effectのプリセット176件と見本画像176枚を、Forge Neoで選んでPositiveへ挿入する独立拡張です。元の英語効果文・Boost・画像を保持しています。日本語／英語の表示に対応します。
+Krea2 BBOX由来の176件と追加エフェクト30件（見本画像付き）を、Forge Neoで選んでPositiveへ挿入する独立拡張です。元の英語効果文・Boost・画像を保持しています。日本語／英語の表示に対応します。
 
 ## 導入
 
@@ -36,8 +36,8 @@ Krea2 BBOX Prompt Effectのプリセット176件と見本画像176枚を、Forge
 
 ### EnableとStyle Boost
 
-- 外側バーの**Enable**は、Generate時の自動追加とInsertの両方をON／OFFにします。OFFにしても挿入済みの文章は残ります。初回はOFFです。同じブラウザープロファイルで同じWebUIを開き直すと、最後に選んだ状態を復元します。内側には重複するEnableを置きません。
-- **Enable Style Boost（スタイルブーストを有効）**は、写真／アニメの追加文だけをON／OFFにします。OFFでも基本の効果文を挿入できます（拡張全体がONで、効果文が空でない場合）。
+- 外側バーの**Enable**は、生成時の自動追加を切り替えます。手動のInsertはOFFでも使えます。OFFにしても挿入済みの文章は残ります。初回はOFFです。同じブラウザープロファイルで同じWebUIを開き直すと、最後に選んだ状態を復元します。内側には重複するEnableを置きません。
+- **Enable Style Boost（スタイルブーストを有効）**は、写真／アニメの追加文だけをON／OFFにします。OFFでも基本の効果文を挿入できます（効果文が空でない場合）。
 
 2つは独立しています。拡張全体をONにしてもBoostはONになりません。Photo／Animeを押すとそのBoostを選び、同じボタンをもう一度押すと解除します。BoostのチェックをOFFにしても最後の種類を記憶し、再びONにすると戻します。プレビュー・Custom本文・保存済み原文・挿入済み文章は区別して保持します。
 
@@ -69,7 +69,7 @@ node --test tests/core.test.cjs tests/transport.test.cjs tests/library.test.cjs 
 
 ## English
 
-An independent Forge Neo extension containing the original 176 Krea2 Prompt Effect presets and preview images. Select an effect, inspect its preview, and explicitly insert it into the txt2img or img2img Positive prompt. It supports a regular tab, side panel and linked browser tab, exclusive Photo/Anime Boost, browser-stored Custom presets, and JSON import/export. With Enable on, Generate adds the selected effect to the submitted Positive prompt for txt2img, img2img and Forge Neo Generation Queue, leaving the input field untouched. Use Insert to place editable text in the prompt field. Generate skips the selected effect when the same text is already in the prompt.
+An independent Forge Neo extension containing the original 176 Krea2 Prompt Effect presets and 30 additional effects, each with a preview image. Select an effect, inspect its preview, and explicitly insert it into the txt2img or img2img Positive prompt. It supports a regular tab, side panel and linked browser tab, exclusive Photo/Anime Boost, browser-stored Custom presets, and JSON import/export. With Enable on, Generate adds the selected effect to the submitted Positive prompt for txt2img, img2img and Forge Neo Generation Queue, leaving the input field untouched. Use Insert to place editable text in the prompt field. Generate skips the selected effect when the same text is already in the prompt.
 
 ### Installation
 
@@ -88,7 +88,7 @@ For a manual installation, download the install ZIP from [Releases](https://gith
 
 Both methods use the bundled assets and require no additional packages or models.
 
-The outer Enable controls both automatic application on Generate and Insert. Turning it off keeps the text already in the prompt field. It starts off on first use, and reopening the same WebUI in the same browser profile restores the last setting you selected. The regular tab, side panel and browser picker contain only Enable Style Boost, which controls the optional Photo/Anime phrase. Turning Boost off leaves the base effect insertable when the extension is enabled. The two states synchronize and persist independently; re-enabling Boost restores its last choice.
+The outer Enable controls automatic application on Generate. Manual Insert is available with Enable on or off. Turning it off keeps the text already in the prompt field. It starts off on first use, and reopening the same WebUI in the same browser profile restores the last setting you selected. The regular tab, side panel and browser picker contain only Enable Style Boost, which controls the optional Photo/Anime phrase. Turning Boost off leaves the base effect insertable. The two states synchronize and persist independently; re-enabling Boost restores its last choice.
 
 Use each card's Favorite/Favorited button to add or remove favorites. All/Recent/Favorites is the order in the regular tab, side panel and browser tab, following the Background Prompter layout. Recent shows the 20 most recently selected effects without duplicates. Favorites and history include saved Custom presets, persist in this browser/origin/base path, and synchronize across tabs. They are separate from Custom JSON exports.
 

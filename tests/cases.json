@@ -276,8 +276,8 @@
       },
       "expected": {
         "preview": "photorealistic image, natural lighting, realistic skin texture, lifelike details, accurate materials, clean high-resolution photo quality",
-        "insertable": false,
-        "reason": "disabled"
+        "insertable": true,
+        "reason": "ok"
       }
     },
     {
@@ -287,8 +287,8 @@
       },
       "expected": {
         "preview": "photorealistic image, natural lighting, realistic skin texture, lifelike details, accurate materials, clean high-resolution photo quality",
-        "insertable": false,
-        "reason": "disabled"
+        "insertable": true,
+        "reason": "ok"
       }
     },
     {

@@ -19,7 +19,7 @@ test('A new tab restores the last explicit Enable choice for this WebUI path', (
 for(const enabled of [true,false])for(const style of ['Photo','Anime'])test(`master ${enabled}, ${style}: Boost OFF uses raw effect, ON restores choice; neither changes the other scope`,()=>{
     const p=createHub().page(),a=p.api;a.commit({enabled,mode:'Custom',customDraft:'raw effect',styleBoost:style});
     a.setStyleBoostEnabled(false);assert.equal(a.state.enabled,enabled);assert.equal(a.state.styleBoost,'');assert.equal(a.state.styleBoostLast,style);assert.equal(a.state.customDraft,'raw effect');
-    const base=a.composeEffect(catalog,a.state);assert.equal(base.preview,'raw effect');assert.equal(base.insertable,enabled);
+    const base=a.composeEffect(catalog,a.state);assert.equal(base.preview,'raw effect');assert.equal(base.insertable,true);
     a.setStyleBoostEnabled(true);assert.equal(a.state.styleBoost,style);assert.equal(a.state.enabled,enabled);assert.equal(a.composeEffect(catalog,a.state).preview,`raw effect, ${catalog.style_boosts[style]}`);
     a.commit({enabled:!enabled});assert.equal(a.state.styleBoost,style);assert.equal(a.state.customDraft,'raw effect');
 });

@@ -10,7 +10,7 @@ function pair(hostOptions = {}, pickerOptions = {}) {
     return { hub, host, picker };
 }
 function request(host, extra = {}) { return { protocol: "prompt-effect-forge-neo", version: 1, scope: "/", session: host.api.session, source: "picker", recipient: host.api.instanceId, type: "insert-request", requestId: "r1", target: "txt2img", text: "effect", ...extra }; }
-test("direct insertion notifies Gradio, only selected prompt changes, disabled host blocks direct writes", () => {
+test("direct insertion notifies Gradio, only selected prompt changes, manual insertion works with Enable off", () => {
     const host = createHub().page();
     host.api.setState({ enabled: true });
     host.inputs.txt2img.value = "leftRIGHT"; host.inputs.txt2img.setSelectionRange(4, 4);
@@ -18,7 +18,7 @@ test("direct insertion notifies Gradio, only selected prompt changes, disabled h
     assert.equal(host.inputs.txt2img.value, "left\nF\nRIGHT"); assert.equal(host.inputs.txt2img.updates, 1);
     assert.equal(host.inputs.img2img.value, "");
     host.api.setState({ enabled: false });
-    assert.equal(host.api.insertIntoPrompt("img2img", "F").reason, "disabled");
+    assert.equal(host.api.insertIntoPrompt("img2img", "F").ok, true);
 });
 test("handshake selects one path, original host is fixed even with another WebUI", () => {
     const { hub, host, picker } = pair();
@@ -45,8 +45,8 @@ test("dedup cache returns the original result after Enable changes; distinct cli
     const { host } = pair(); const first = request(host);
     host.api.handleMessage(first, "storage"); host.api.setState({ enabled: false }); host.api.handleMessage(first, "broadcast");
     assert.equal(host.inputs.txt2img.updates, 1);
-    host.api.handleMessage(request(host, { requestId: "r2" }), "storage"); assert.equal(host.inputs.txt2img.updates, 1);
-    host.api.setState({ enabled: true }); host.api.handleMessage(request(host, { requestId: "r3" }), "storage"); assert.equal(host.inputs.txt2img.updates, 2);
+    host.api.handleMessage(request(host, { requestId: "r2" }), "storage"); assert.equal(host.inputs.txt2img.updates, 2);
+    host.api.setState({ enabled: true }); host.api.handleMessage(request(host, { requestId: "r3" }), "storage"); assert.equal(host.inputs.txt2img.updates, 3);
 });
 test("ACK loss is uncertain, pending clears, no automatic retransmission", () => {
     const { hub, host, picker } = pair(); host.control.dropACK = true;
@@ -100,9 +100,9 @@ test("revision tiebreak and composition defer remote snapshots without echo", ()
     assert.equal(a.state.customDraft, ""); a.composeEnd(); assert.equal(a.state.customDraft, "remote");
     a.receiveState({ schema_version: 1, state: { ...a.state, customDraft: "old" }, revision: { counter: 4, actor: "a" } }); assert.equal(a.state.customDraft, "remote");
 });
-test("a delayed request meets the current disabled host gate and invalid selections are harmless", () => {
+test("a delayed manual request survives Enable turning off and invalid selections are harmless", () => {
     const { host } = pair(); host.api.setState({ enabled: false });
-    host.api.handleMessage(request(host), "storage"); assert.equal(host.inputs.txt2img.updates, 0);
+    host.api.handleMessage(request(host), "storage"); assert.equal(host.inputs.txt2img.updates, 1);
     host.api.setState({ enabled: true }); host.inputs.txt2img.selectionStart = -1;
-    host.api.handleMessage(request(host, { requestId: "new" }), "storage"); assert.equal(host.inputs.txt2img.updates, 0);
+    host.api.handleMessage(request(host, { requestId: "new" }), "storage"); assert.equal(host.inputs.txt2img.updates, 1);
 });

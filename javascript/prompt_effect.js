@@ -135,7 +135,7 @@
         const recent = recentLibraryIds(), query = browsing.query.trim().toLowerCase();
         return [...(catalog?.presets || []), ...records].filter(item =>
             (browsing.category === 'All' || (item.category || 'Custom') === browsing.category)
-            && (!query || `${item.name} ${item.category || 'Custom'} ${item.prompt || item.text}`.toLowerCase().includes(query))
+            && (!query || `${item.name} ${item.name_ja || ''} ${item.category || 'Custom'} ${item.prompt || item.text}`.toLowerCase().includes(query))
             && (filter === 'all' || (filter === 'favorites' ? isFavorite(item.id) : recent.includes(item.id)))
         ).sort((a,b)=>filter === 'recent' ? recent.indexOf(a.id)-recent.indexOf(b.id) : 0);
     }
@@ -171,7 +171,7 @@
         } else return { preview: "", insertable: false, reason: "invalid_mode" };
         const boost = boostName ? data.style_boosts[boostName] : "";
         const preview = !boost || raw.toLowerCase().includes(boost.toLowerCase()) ? raw : raw ? `${raw}, ${boost}` : boost;
-        const reason = value.enabled !== true ? "disabled" : !preview ? "empty_effect" : codePoints(preview) > 16000 ? "text_too_long" : "ok";
+        const reason = !preview ? "empty_effect" : codePoints(preview) > 16000 ? "text_too_long" : "ok";
         return { preview, insertable: reason === "ok", reason };
     }
 
@@ -224,19 +224,18 @@
     }
 
     function validateCatalog(value) {
-        if (value?.schema_version !== 1 || !Array.isArray(value.presets) || value.presets.length !== 176 ||
+        if (value?.schema_version !== 1 || !Array.isArray(value.presets) || !value.presets.length ||
             !Array.isArray(value.categories) || value.categories.join("|") !== "All|Photo|Camera FX|Art|Light|Weather|Color Theme|Finish|Custom" ||
             !["Photo", "Anime"].every(key => typeof value.style_boosts?.[key] === "string" && value.style_boosts[key])) throw new Error("invalid_catalog");
         const ids = new Set();
-        const expected = { Photo: 27, "Camera FX": 24, Art: 14, Light: 13, Weather: 9, "Color Theme": 56, Finish: 33 };
-        const counts = {};
+        const categories = new Set(value.categories.filter(name => name !== "All" && name !== "Custom"));
         for (const item of value.presets) {
             if (!item || typeof item.id !== "string" || ids.has(item.id) || typeof item.name !== "string" ||
-                typeof item.prompt !== "string" || !item.prompt.trim() || !(item.category in expected)) throw new Error("invalid_catalog");
+                typeof item.prompt !== "string" || !item.prompt.trim() || !categories.has(item.category)) throw new Error("invalid_catalog");
             assetUrl(item.thumbnail);
-            ids.add(item.id); counts[item.category] = (counts[item.category] || 0) + 1;
+            ids.add(item.id);
         }
-        if (Object.keys(expected).some(key => expected[key] !== counts[key])) throw new Error("invalid_catalog");
+        if (!ids.has(value.defaults?.preset_id)) throw new Error("invalid_catalog");
         return value;
     }
 
@@ -456,7 +455,6 @@
 
     function insertIntoPrompt(target, text) {
         if (isStandalone || !ready) return { ok: false, reason: "not_ready" };
-        if (state.enabled !== true) return { ok: false, reason: "disabled" };
         if (!["txt2img", "img2img"].includes(target)) return { ok: false, reason: "invalid_target" };
         if (typeof text !== "string" || !text.trim() || codePoints(text) > 16000) return { ok: false, reason: "invalid_text" };
         const input = appRoot().querySelector(`#${target}_prompt textarea`);
@@ -581,7 +579,7 @@
 
     const strings = {
         en: {
-            subtitle: "176 prompt effects", enabled: "Enable", preview: "Effect preview", search: "Search effects…", size: "Card size",
+            subtitle: "{count} prompt effects", enabled: "Enable", preview: "Effect preview", search: "Search effects…", size: "Card size",
             favorites: "Favorites", recent: "Recent", favorite: "Favorite", favorited: "Favorited", library_filters: "Effect filter", drawer_search: "Search recent and favorites...",
             library_unreadable: "Some favorites or history records cannot be read and were preserved. Other records remain available.",
             boost: "Style Boost", off: "Off", Photo: "Photo", Anime: "Anime", All: "All", Custom: "Custom", "Camera FX": "Camera FX", Art: "Art", Light: "Light", Weather: "Weather", "Color Theme": "Color Theme", Finish: "Finish",
@@ -611,7 +609,7 @@
             modal_busy: "Close the other side panel or dialog before opening Prompt Effect.", resize: "Side panel width", image_missing: "Preview unavailable", popups: "Allow popups to open the picker.", language: "Language",
         },
         ja: {
-            subtitle: "エフェクト176件", enabled: "有効", preview: "効果プレビュー", search: "エフェクトを検索…", size: "カードサイズ",
+            subtitle: "エフェクト{count}件", enabled: "有効", preview: "効果プレビュー", search: "エフェクトを検索…", size: "カードサイズ",
             favorites: "お気に入り", recent: "最近使用", favorite: "お気に入り", favorited: "お気に入り済み", library_filters: "エフェクトの絞り込み", drawer_search: "最近・お気に入りを検索...",
             library_unreadable: "読めないお気に入り・履歴は保持しました。他の記録は引き続き利用できます。",
             boost: "スタイルブースト", off: "なし", Photo: "写真", Anime: "アニメ", All: "すべて", Custom: "カスタム", "Camera FX": "カメラ効果", Art: "アート", Light: "光", Weather: "天候", "Color Theme": "配色", Finish: "仕上げ",
@@ -646,6 +644,10 @@
         const selected = typeof opts !== "undefined" ? opts.localization : window.opts?.localization;
         return /ja|japan|日本/i.test(String(selected || "")) || (!selected && navigator.language?.startsWith("ja")) ? "ja" : "en";
     }
+    function presetName(item) {
+        return (locale() === "ja" && item?.name_ja) || item?.name || "";
+    }
+
     function t(key) { return strings[locale()][key] || strings.en[key] || key; }
     function esc(value) { return String(value ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]); }
     function setStatus(value) { status = value; renderAll(); }
@@ -785,10 +787,10 @@
             root.querySelector('[data-pef-field="query"]').setAttribute("aria-label", t("search"));
             root.querySelector('[data-pef-field="locale"]').setAttribute("aria-label", t("language"));
         }
-        setText(root.querySelector("[data-pef-subtitle]"), t("subtitle"));
+        setText(root.querySelector("[data-pef-subtitle]"), t("subtitle").replace("{count}", String(catalog?.presets.length ?? 0)));
         setText(root.querySelector('[data-pef-connection]'),t(discovery?'connecting':connected?'connected':status==='ambiguous'?'ambiguous':'disconnected'));
         if(!view.panel) setText(root.querySelector('[data-pef-action="new-tab"]'),language==='ja'?'別ブラウザータブで開く':'Open in browser tab');
-        setText(root.querySelector('[data-pef-detail-name]'),state.mode === 'Custom' ? state.customName || t('Custom') : catalog?.presets.find(p=>p.id===state.selectedPresetId)?.name || '');
+        setText(root.querySelector('[data-pef-detail-name]'),state.mode === 'Custom' ? state.customName || t('Custom') : presetName(catalog?.presets.find(p=>p.id===state.selectedPresetId)));
         setText(root.querySelector('[data-pef-panel-target]'), drawerTarget);
         setValue(root.querySelector('[data-pef-field="category"]'),view.category);
         const effect = catalog ? composeEffect(catalog, state) : { preview: "", insertable: false, reason: "not_ready" };
@@ -821,16 +823,17 @@
             grid.innerHTML = filtered.length ? filtered.map(item => {
                 const custom=item.id.startsWith('custom:'),chosen=custom?state.mode==='Custom'&&item.id===state.customPresetId:state.mode==='Preset'&&item.id===state.selectedPresetId;
                 const favorite=isFavorite(item.id);
+                const name = presetName(item);
                 return `<article class="pef-card${chosen?' is-selected':''}" data-pef-id="${esc(item.id)}">
-                    <button type="button" class="pef-card-select" data-pef-action="${custom?'load-custom':'preset'}" data-pef-id="${esc(item.id)}" aria-pressed="${chosen}" title="${esc(item.name+'\n'+(item.prompt||item.text))}">
+                    <button type="button" class="pef-card-select" data-pef-action="${custom?'load-custom':'preset'}" data-pef-id="${esc(item.id)}" aria-pressed="${chosen}" title="${esc(name+'\n'+(item.prompt||item.text))}">
                     ${custom?`<span class="pef-image-missing">${esc(t('Custom'))}</span>`:`<img src="${esc(assetUrl(item.thumbnail))}" alt="" loading="lazy" decoding="async" width="192" height="128">`}
-                    <span class="pef-card-copy"><strong>${esc(item.name)}</strong><small>${esc(t(item.category||'Custom'))}</small></span></button>
-                    <button type="button" class="pef-favorite" data-pef-action="favorite" data-pef-id="${esc(item.id)}" aria-pressed="${favorite}" aria-label="${esc(t(favorite?'favorited':'favorite')+': '+item.name)}">${esc(t(favorite?'favorited':'favorite'))}</button></article>`;
+                    <span class="pef-card-copy"><strong>${esc(name)}</strong><small>${esc(t(item.category||'Custom'))}</small></span></button>
+                    <button type="button" class="pef-favorite" data-pef-action="favorite" data-pef-id="${esc(item.id)}" aria-pressed="${favorite}" aria-label="${esc(t(favorite?'favorited':'favorite')+': '+name)}">${esc(t(favorite?'favorited':'favorite'))}</button></article>`;
             }).join("") : `<p class="pef-empty">${esc(t("no_matches"))}</p>`;
             grid.querySelectorAll("img").forEach(img => img.addEventListener("error", () => { const replacement = document.createElement("span"); replacement.className = "pef-image-missing"; replacement.textContent = t("image_missing"); img.replaceWith(replacement); }, { once: true }));
             view.gridKey = gridKey;
         }
-        setText(root.querySelector("[data-pef-count]"), `${filtered.length} / ${view.category === "Custom" ? records.length : 176+records.length}`);
+        setText(root.querySelector("[data-pef-count]"), `${filtered.length} / ${view.category === "Custom" ? records.length : (catalog?.presets.length ?? 0) + records.length}`);
         root.querySelectorAll('[data-pef-action="insert"]').forEach(node => {
             node.disabled = !ready || !effect.insertable || !!pending || !!discovery || (isStandalone && !connected);
             node.title = node.disabled ? t(!effect.insertable ? effect.reason : status || "disconnected") : t(`insert_${node.dataset.pefTarget}`);
@@ -1041,7 +1044,7 @@
         const selected = catalog?.presets.find(item => item.id === state.selectedPresetId);
         appRoot().querySelectorAll(".pef-bar").forEach(bar => {
             bar.querySelector("[data-pef-field]").checked = state.enabled;
-            const name = state.mode === "Custom" ? state.customName || t("Custom") : selected?.name || t("unknown_preset");
+            const name = state.mode === "Custom" ? state.customName || t("Custom") : presetName(selected) || t("unknown_preset");
             setText(bar.querySelector("[data-pef-selected]"), name);
             setText(bar.querySelector("[data-pef-bar-status]"), status ? t(status) : loadError ? t("load_failed") : "");
             const image = bar.querySelector("img");

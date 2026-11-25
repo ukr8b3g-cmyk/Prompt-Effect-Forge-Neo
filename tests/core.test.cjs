@@ -11,9 +11,9 @@ test("528 upstream effect/boost outputs use the shipped composer", () => {
     assert.equal(golden.cases.length, 528);
     for (const row of golden.cases) assert.equal(api.composeEffect(catalog, { ...api.state, selectedPresetId: row.preset_id, styleBoost: row.style_boost }).preview, row.expected_effect);
 });
-test("disabled insertion keeps every byte; explicit repeated Insert adds a second fragment", () => {
+test("manual insertion replaces the selection with Enable off; explicit repeated Insert adds a second fragment", () => {
     const base = "  base\n\n";
-    assert.equal(api.insertEffect(catalog, { ...api.state, enabled: false }, base, 0, base.length).value, base);
+    assert.equal(api.insertEffect(catalog, { ...api.state, enabled: false }, base, 0, base.length).value, catalog.presets[0].prompt);
     const first = api.splicePrompt("base", 4, 4, "F");
     assert.equal(api.splicePrompt(first.value, first.value.length, first.value.length, "F").value, "base\nF\nF");
 });

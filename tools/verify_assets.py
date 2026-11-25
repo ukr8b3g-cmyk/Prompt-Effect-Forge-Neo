@@ -1,11 +1,11 @@
-"""Verify shipped catalog and 176 WebP thumbnails without optional dependencies."""
+"""Verify shipped catalog and its WebP thumbnails without optional dependencies."""
 import hashlib
 import json
 import struct
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-CATALOG_SHA256 = "3a3aa6152e749624fc5398b973a3f01494cd53ef9814e3469a2861ea4eedb98f"
+CATALOG_SHA256 = "693075d64340a70d0f4ed1f7e48c3d7b92d06e32bc45651cf5ba03a2f8846cb0"
 
 
 def dimensions(raw):
@@ -27,7 +27,7 @@ def main():
     assert hashlib.sha256(raw_catalog).hexdigest() == CATALOG_SHA256, "Catalog changed"
     catalog = json.loads(raw_catalog)
     manifest = json.loads((ROOT / "provenance/asset_manifest.json").read_text(encoding="utf-8"))
-    assert len(catalog["presets"]) == len(manifest["assets"]) == 176
+    assert len(catalog["presets"]) == len(manifest["assets"]) == manifest["summary"]["preset_count"]
     paths = set()
     for item in manifest["assets"]:
         path = ROOT / item["target_path"]
@@ -40,7 +40,7 @@ def main():
         assert preset["thumbnail"] == item["target_path"]
         paths.add(path.resolve())
     assert {p.resolve() for p in (ROOT / "assets/thumbnails").iterdir() if p.is_file()} == paths
-    print(json.dumps({"status": "PASS", "presets": 176, "thumbnails": 176, "bytes": 630920}))
+    print(json.dumps({"status": "PASS", "presets": len(catalog["presets"]), "thumbnails": len(paths), "bytes": sum(p.stat().st_size for p in paths)}))
 
 
 if __name__ == "__main__":

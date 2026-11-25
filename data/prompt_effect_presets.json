@@ -63,7 +63,7 @@
     "Illustration": "Art",
     "Custom Preset": "Custom"
   },
-  "name_ja_note": "Source defines English names only. No Japanese labels have been invented.",
+  "name_ja_note": "Upstream presets retain their original English names. Extension presets also have Japanese display names.",
   "custom_presets": {
     "bundled_count": 0,
     "builtin_mutation_allowed": false,
@@ -3589,6 +3589,456 @@
         "backend_path": "nodes_element_framing.py",
         "backend_line": 1039,
         "thumbnail_resolution": "explicit_field"
+      }
+    },
+    {
+      "id": "venetian_blind_shadows",
+      "name": "Venetian Blind Shadows",
+      "name_ja": "ブラインド越しの光",
+      "category": "Light",
+      "prompt": "venetian blind shadows, parallel bands of light and shade, stripes bending across curved surfaces",
+      "thumbnail": "assets/thumbnails/venetian_blind_shadows.webp",
+      "chip": "Venetian Blind Shadows",
+      "tone": "lighting",
+      "builtin_readonly": true,
+      "display_order": 176,
+      "source": {
+        "origin": "Prompt-Effect-Forge-Neo"
+      }
+    },
+    {
+      "id": "water_caustics",
+      "name": "Water Caustics",
+      "name_ja": "水面の反射光",
+      "category": "Light",
+      "prompt": "water caustics, interlacing ripples of light, bright shifting patterns across submerged surfaces",
+      "thumbnail": "assets/thumbnails/water_caustics.webp",
+      "chip": "Water Caustics",
+      "tone": "lighting",
+      "builtin_readonly": true,
+      "display_order": 177,
+      "source": {
+        "origin": "Prompt-Effect-Forge-Neo"
+      }
+    },
+    {
+      "id": "cross_filter",
+      "name": "Cross Filter",
+      "name_ja": "クロスフィルター",
+      "category": "Camera FX",
+      "prompt": "cross filter, four pointed diffraction stars on bright highlights, fine tapering rays around each point light",
+      "thumbnail": "assets/thumbnails/cross_filter.webp",
+      "chip": "Cross Filter",
+      "tone": "camera-fx",
+      "builtin_readonly": true,
+      "display_order": 178,
+      "source": {
+        "origin": "Prompt-Effect-Forge-Neo"
+      }
+    },
+    {
+      "id": "film_light_leak",
+      "name": "Film Light Leak",
+      "name_ja": "フィルムの光漏れ",
+      "category": "Camera FX",
+      "prompt": "film light leak, translucent red and amber glow along one edge, soft exposure fog fading toward the center",
+      "thumbnail": "assets/thumbnails/film_light_leak.webp",
+      "chip": "Film Light Leak",
+      "tone": "camera-fx",
+      "builtin_readonly": true,
+      "display_order": 179,
+      "source": {
+        "origin": "Prompt-Effect-Forge-Neo"
+      }
+    },
+    {
+      "id": "bleach_bypass",
+      "name": "Bleach Bypass",
+      "name_ja": "銀残し",
+      "category": "Photo",
+      "prompt": "bleach bypass, subdued colors, dense blacks, silvery highlights, strong tonal contrast",
+      "thumbnail": "assets/thumbnails/bleach_bypass.webp",
+      "chip": "Bleach Bypass",
+      "tone": "film",
+      "builtin_readonly": true,
+      "display_order": 180,
+      "source": {
+        "origin": "Prompt-Effect-Forge-Neo"
+      }
+    },
+    {
+      "id": "coarse_halftone",
+      "name": "Coarse Halftone",
+      "name_ja": "粗い網点印刷",
+      "category": "Art",
+      "prompt": "coarse halftone print, regularly spaced ink dots of varying size, paper visible between dots",
+      "thumbnail": "assets/thumbnails/coarse_halftone.webp",
+      "chip": "Coarse Halftone",
+      "tone": "illustration",
+      "builtin_readonly": true,
+      "display_order": 181,
+      "source": {
+        "origin": "Prompt-Effect-Forge-Neo"
+      }
+    },
+    {
+      "id": "blind_emboss",
+      "name": "Blind Emboss",
+      "name_ja": "空押し",
+      "category": "Finish",
+      "prompt": "blind emboss, raised uninked contours on paper, narrow edge highlights and shallow relief shadows",
+      "thumbnail": "assets/thumbnails/blind_emboss.webp",
+      "chip": "Blind Emboss",
+      "tone": "Finish",
+      "builtin_readonly": true,
+      "display_order": 182,
+      "source": {
+        "origin": "Prompt-Effect-Forge-Neo"
+      }
+    },
+    {
+      "id": "photocopy_grain",
+      "name": "Photocopy Grain",
+      "name_ja": "白黒コピー",
+      "category": "Finish",
+      "prompt": "black and white photocopy, dense black toner, broken outlines, scattered toner grain on white paper",
+      "thumbnail": "assets/thumbnails/photocopy_grain.webp",
+      "chip": "Photocopy Grain",
+      "tone": "Finish",
+      "builtin_readonly": true,
+      "display_order": 183,
+      "source": {
+        "origin": "Prompt-Effect-Forge-Neo"
+      }
+    },
+    {
+      "id": "pink_hearts",
+      "name": "Pink Hearts",
+      "name_ja": "ピンクのハート",
+      "category": "Art",
+      "prompt": "pink heart effects, translucent heart shapes of varying sizes, soft luminous edges",
+      "thumbnail": "assets/thumbnails/pink_hearts.webp",
+      "chip": "Pink Hearts",
+      "tone": "illustration",
+      "builtin_readonly": true,
+      "display_order": 184,
+      "source": {
+        "origin": "Prompt-Effect-Forge-Neo"
+      }
+    },
+    {
+      "id": "lightning_arcs",
+      "name": "Lightning Arcs",
+      "name_ja": "稲妻の放電",
+      "category": "Light",
+      "prompt": "lightning effects, branching blue-white arcs, thin electric filaments, brief violet afterglow",
+      "thumbnail": "assets/thumbnails/lightning_arcs.webp",
+      "chip": "Lightning Arcs",
+      "tone": "lighting",
+      "builtin_readonly": true,
+      "display_order": 185,
+      "source": {
+        "origin": "Prompt-Effect-Forge-Neo"
+      }
+    },
+    {
+      "id": "cherry_blossom_storm",
+      "name": "Cherry Blossom Storm",
+      "name_ja": "桜吹雪",
+      "category": "Weather",
+      "prompt": "cherry blossom storm, sweeping ribbons of pink petals, scattered petals at different depths",
+      "thumbnail": "assets/thumbnails/cherry_blossom_storm.webp",
+      "chip": "Cherry Blossom Storm",
+      "tone": "weather",
+      "builtin_readonly": true,
+      "display_order": 186,
+      "source": {
+        "origin": "Prompt-Effect-Forge-Neo"
+      }
+    },
+    {
+      "id": "time_stopping_clock_hands",
+      "name": "Time-Stopping Clock Hands",
+      "name_ja": "時を止める時計の針",
+      "category": "Art",
+      "prompt": "time-stopping clock hands, translucent clock face, overlapping hands frozen at different angles, suspended tick marks",
+      "thumbnail": "assets/thumbnails/time_stopping_clock_hands.webp",
+      "chip": "Time-Stopping Clock Hands",
+      "tone": "illustration",
+      "builtin_readonly": true,
+      "display_order": 187,
+      "source": {
+        "origin": "Prompt-Effect-Forge-Neo"
+      }
+    },
+    {
+      "id": "moonlight_slash",
+      "name": "Moonlight Slash",
+      "name_ja": "月光の斬撃",
+      "category": "Art",
+      "prompt": "moonlight slash effect, narrow silver-blue crescent, sharp leading edge, fading luminous arc",
+      "thumbnail": "assets/thumbnails/moonlight_slash.webp",
+      "chip": "Moonlight Slash",
+      "tone": "illustration",
+      "builtin_readonly": true,
+      "display_order": 188,
+      "source": {
+        "origin": "Prompt-Effect-Forge-Neo"
+      }
+    },
+    {
+      "id": "localized_spatial_distortion",
+      "name": "Localized Spatial Distortion",
+      "name_ja": "局所的な空間の歪み",
+      "category": "Camera FX",
+      "prompt": "localized spatial distortion, ripples bending nearby contours, undisturbed outer edges",
+      "thumbnail": "assets/thumbnails/localized_spatial_distortion.webp",
+      "chip": "Localized Spatial Distortion",
+      "tone": "camera-fx",
+      "builtin_readonly": true,
+      "display_order": 189,
+      "source": {
+        "origin": "Prompt-Effect-Forge-Neo"
+      }
+    },
+    {
+      "id": "dimensional_rift",
+      "name": "Dimensional Rift",
+      "name_ja": "次元の裂け目",
+      "category": "Art",
+      "prompt": "dimensional rift, jagged opening edged with violet light, a different sky visible through the gap",
+      "thumbnail": "assets/thumbnails/dimensional_rift.webp",
+      "chip": "Dimensional Rift",
+      "tone": "illustration",
+      "builtin_readonly": true,
+      "display_order": 190,
+      "source": {
+        "origin": "Prompt-Effect-Forge-Neo"
+      }
+    },
+    {
+      "id": "viewfinder_overlay",
+      "name": "Viewfinder Overlay",
+      "name_ja": "録画ビューファインダー",
+      "category": "Camera FX",
+      "prompt": "viewfinder overlay, thin corner brackets, central focus frame, small red recording indicator",
+      "thumbnail": "assets/thumbnails/viewfinder_overlay.webp",
+      "chip": "Viewfinder Overlay",
+      "tone": "camera-fx",
+      "builtin_readonly": true,
+      "display_order": 191,
+      "source": {
+        "origin": "Prompt-Effect-Forge-Neo"
+      }
+    },
+    {
+      "id": "fireflies",
+      "name": "Firefly Glow",
+      "name_ja": "蛍の光",
+      "category": "Light",
+      "prompt": "firefly glow, scattered yellow-green points at uneven heights, soft halos of varying brightness",
+      "thumbnail": "assets/thumbnails/fireflies.webp",
+      "chip": "Firefly Glow",
+      "tone": "lighting",
+      "builtin_readonly": true,
+      "display_order": 192,
+      "source": {
+        "origin": "Prompt-Effect-Forge-Neo"
+      }
+    },
+    {
+      "id": "large_light_burst",
+      "name": "Large Light Burst",
+      "name_ja": "大きな閃光",
+      "category": "Light",
+      "prompt": "large light burst, brilliant white core, broad expanding halo, soft falloff toward the edges",
+      "thumbnail": "assets/thumbnails/large_light_burst.webp",
+      "chip": "Large Light Burst",
+      "tone": "lighting",
+      "builtin_readonly": true,
+      "display_order": 193,
+      "source": {
+        "origin": "Prompt-Effect-Forge-Neo"
+      }
+    },
+    {
+      "id": "parallel_speed_lines",
+      "name": "Parallel Speed Lines",
+      "name_ja": "平行のスピード線",
+      "category": "Art",
+      "prompt": "parallel speed lines, crisp tapered strokes along one axis, clear space between the lines",
+      "thumbnail": "assets/thumbnails/parallel_speed_lines.webp",
+      "chip": "Parallel Speed Lines",
+      "tone": "illustration",
+      "builtin_readonly": true,
+      "display_order": 194,
+      "source": {
+        "origin": "Prompt-Effect-Forge-Neo"
+      }
+    },
+    {
+      "id": "radial_emphasis_lines",
+      "name": "Radial Emphasis Lines",
+      "name_ja": "漫画の集中線",
+      "category": "Art",
+      "prompt": "radial emphasis lines, tapered strokes converging from the frame edges, clear central opening",
+      "thumbnail": "assets/thumbnails/radial_emphasis_lines.webp",
+      "chip": "Radial Emphasis Lines",
+      "tone": "illustration",
+      "builtin_readonly": true,
+      "display_order": 195,
+      "source": {
+        "origin": "Prompt-Effect-Forge-Neo"
+      }
+    },
+    {
+      "id": "lens_flare",
+      "name": "Lens Flare",
+      "name_ja": "レンズフレア",
+      "category": "Camera FX",
+      "prompt": "lens flare, faint translucent discs aligned with a bright light source, soft optical haze",
+      "thumbnail": "assets/thumbnails/lens_flare.webp",
+      "chip": "Lens Flare",
+      "tone": "camera-fx",
+      "builtin_readonly": true,
+      "display_order": 196,
+      "source": {
+        "origin": "Prompt-Effect-Forge-Neo"
+      }
+    },
+    {
+      "id": "flying_sparks",
+      "name": "Flying Sparks",
+      "name_ja": "飛び散る火花",
+      "category": "Light",
+      "prompt": "shower of sparks, short bright streaks fanning outward from a single point, white-hot tips",
+      "thumbnail": "assets/thumbnails/flying_sparks.webp",
+      "chip": "Flying Sparks",
+      "tone": "lighting",
+      "builtin_readonly": true,
+      "display_order": 197,
+      "source": {
+        "origin": "Prompt-Effect-Forge-Neo"
+      }
+    },
+    {
+      "id": "drifting_embers",
+      "name": "Drifting Embers",
+      "name_ja": "漂う火の粉",
+      "category": "Light",
+      "prompt": "drifting embers, scattered red-orange flecks at different depths, dim charcoal edges",
+      "thumbnail": "assets/thumbnails/drifting_embers.webp",
+      "chip": "Drifting Embers",
+      "tone": "lighting",
+      "builtin_readonly": true,
+      "display_order": 198,
+      "source": {
+        "origin": "Prompt-Effect-Forge-Neo"
+      }
+    },
+    {
+      "id": "aura",
+      "name": "Luminous Aura",
+      "name_ja": "オーラ",
+      "category": "Light",
+      "prompt": "luminous aura, soft layers of light around the silhouette, translucent wisps fading outward",
+      "thumbnail": "assets/thumbnails/aura.webp",
+      "chip": "Luminous Aura",
+      "tone": "lighting",
+      "builtin_readonly": true,
+      "display_order": 199,
+      "source": {
+        "origin": "Prompt-Effect-Forge-Neo"
+      }
+    },
+    {
+      "id": "open_flames",
+      "name": "Open Flames",
+      "name_ja": "炎",
+      "category": "Light",
+      "prompt": "open flames, overlapping tongues of fire, bright inner cores, wavering translucent edges",
+      "thumbnail": "assets/thumbnails/open_flames.webp",
+      "chip": "Open Flames",
+      "tone": "lighting",
+      "builtin_readonly": true,
+      "display_order": 200,
+      "source": {
+        "origin": "Prompt-Effect-Forge-Neo"
+      }
+    },
+    {
+      "id": "fireball",
+      "name": "Fireball",
+      "name_ja": "火球",
+      "category": "Art",
+      "prompt": "fireball, compact spherical core, curling flames around the rim, bright outer halo",
+      "thumbnail": "assets/thumbnails/fireball.webp",
+      "chip": "Fireball",
+      "tone": "illustration",
+      "builtin_readonly": true,
+      "display_order": 201,
+      "source": {
+        "origin": "Prompt-Effect-Forge-Neo"
+      }
+    },
+    {
+      "id": "magic_circle",
+      "name": "Magic Circle",
+      "name_ja": "魔法陣",
+      "category": "Art",
+      "prompt": "luminous magic circle, concentric rings, fine geometric symbols spaced around the rim",
+      "thumbnail": "assets/thumbnails/magic_circle.webp",
+      "chip": "Magic Circle",
+      "tone": "illustration",
+      "builtin_readonly": true,
+      "display_order": 202,
+      "source": {
+        "origin": "Prompt-Effect-Forge-Neo"
+      }
+    },
+    {
+      "id": "explosion",
+      "name": "Explosion",
+      "name_ja": "爆発",
+      "category": "Art",
+      "prompt": "explosion effect, expanding fire and smoke, bright central flash, rolling outer clouds",
+      "thumbnail": "assets/thumbnails/explosion.webp",
+      "chip": "Explosion",
+      "tone": "illustration",
+      "builtin_readonly": true,
+      "display_order": 203,
+      "source": {
+        "origin": "Prompt-Effect-Forge-Neo"
+      }
+    },
+    {
+      "id": "dappled_sunlight",
+      "name": "Dappled Sunlight",
+      "name_ja": "木漏れ日",
+      "category": "Light",
+      "prompt": "dappled sunlight, irregular patches of light, overlapping leaf shadows, soft shifting edges",
+      "thumbnail": "assets/thumbnails/dappled_sunlight.webp",
+      "chip": "Dappled Sunlight",
+      "tone": "lighting",
+      "builtin_readonly": true,
+      "display_order": 204,
+      "source": {
+        "origin": "Prompt-Effect-Forge-Neo"
+      }
+    },
+    {
+      "id": "hand_drawn_hatching",
+      "name": "Hand-Drawn Hatching",
+      "name_ja": "手描きハッチング",
+      "category": "Art",
+      "prompt": "hand-drawn ink hatching, fine parallel strokes following surface contours, light crosshatching in deep shadows, subtle variation in line spacing and pressure",
+      "thumbnail": "assets/thumbnails/hand_drawn_hatching.webp",
+      "chip": "Hand-Drawn Hatching",
+      "tone": "illustration",
+      "builtin_readonly": true,
+      "display_order": 205,
+      "source": {
+        "origin": "Prompt-Effect-Forge-Neo"
       }
     }
   ]

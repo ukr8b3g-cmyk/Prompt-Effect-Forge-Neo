@@ -7,3 +7,5 @@ The UI mounting pattern, natural-language insertion boundary rules and original-
 Original MIT license notices and the Background notice are retained in `provenance/`. `provenance/asset_manifest.json` records each thumbnail's original URL, SHA-256, Git blob SHA, byte size and dimensions. The source repositories do not declare separate per-image terms in the inspected files; this extension does not invent or replace those terms.
 
 New extension code is licensed under the MIT license in `LICENSE`. The 176 images are selection previews, not generation reference inputs. There is no network download or model-specific prompt conversion at runtime.
+
+The 30 additional Prompt Effect presets have original GPT Image previews encoded as 192 x 128 WebP. Their manifest entries identify the extension as their origin.
