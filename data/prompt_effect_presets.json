@@ -4040,6 +4040,96 @@
       "source": {
         "origin": "Prompt-Effect-Forge-Neo"
       }
+    },
+    {
+      "id": "underlight",
+      "name": "Underlight",
+      "name_ja": "アンダーライト",
+      "category": "Light",
+      "prompt": "underlighting, low light source, illuminated undersides, upward cast shadows",
+      "thumbnail": "assets/thumbnails/underlight.webp",
+      "chip": "Underlight",
+      "tone": "lighting",
+      "builtin_readonly": true,
+      "display_order": 206,
+      "source": {
+        "origin": "Prompt-Effect-Forge-Neo"
+      }
+    },
+    {
+      "id": "split_light",
+      "name": "Split Light",
+      "name_ja": "スプリットライト",
+      "category": "Light",
+      "prompt": "split lighting, key light directly from one side, distinct division between light and shadow, minimal fill",
+      "thumbnail": "assets/thumbnails/split_light.webp",
+      "chip": "Split Light",
+      "tone": "lighting",
+      "builtin_readonly": true,
+      "display_order": 207,
+      "source": {
+        "origin": "Prompt-Effect-Forge-Neo"
+      }
+    },
+    {
+      "id": "butterfly_light",
+      "name": "Butterfly Light",
+      "name_ja": "バタフライライト",
+      "category": "Light",
+      "prompt": "butterfly lighting, elevated frontal key light, short centered shadow beneath the nose, symmetrical cheek highlights",
+      "thumbnail": "assets/thumbnails/butterfly_light.webp",
+      "chip": "Butterfly Light",
+      "tone": "lighting",
+      "builtin_readonly": true,
+      "display_order": 208,
+      "source": {
+        "origin": "Prompt-Effect-Forge-Neo"
+      }
+    },
+    {
+      "id": "rembrandt_light",
+      "name": "Rembrandt Light",
+      "name_ja": "レンブラントライト",
+      "category": "Light",
+      "prompt": "Rembrandt lighting, elevated diagonal key light, small triangle of light on the shadowed cheek, deep surrounding shadow",
+      "thumbnail": "assets/thumbnails/rembrandt_light.webp",
+      "chip": "Rembrandt Light",
+      "tone": "lighting",
+      "builtin_readonly": true,
+      "display_order": 209,
+      "source": {
+        "origin": "Prompt-Effect-Forge-Neo"
+      }
+    },
+    {
+      "id": "window_frame_light",
+      "name": "Window Frame Light",
+      "name_ja": "窓枠越しの光",
+      "category": "Light",
+      "prompt": "directional window light, broad intersecting window frame shadows, rectangular patches of daylight",
+      "thumbnail": "assets/thumbnails/window_frame_light.webp",
+      "chip": "Window Frame Light",
+      "tone": "lighting",
+      "builtin_readonly": true,
+      "display_order": 210,
+      "source": {
+        "origin": "Prompt-Effect-Forge-Neo"
+      }
+    },
+    {
+      "id": "two_tone_lighting",
+      "name": "Two-Tone Lighting",
+      "name_ja": "2色ライティング",
+      "category": "Light",
+      "prompt": "two-tone lighting, amber key light from the left, blue light from the right, distinct warm and cool highlights",
+      "thumbnail": "assets/thumbnails/two_tone_lighting.webp",
+      "chip": "Two-Tone Lighting",
+      "tone": "lighting",
+      "builtin_readonly": true,
+      "display_order": 211,
+      "source": {
+        "origin": "Prompt-Effect-Forge-Neo"
+      }
     }
   ]
 }

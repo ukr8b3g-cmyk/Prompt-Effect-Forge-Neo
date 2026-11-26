@@ -32,9 +32,9 @@
   "selection_rule": "EFFECT_PRESETS filtered by isAllowedPreset for Prompt Effect; Background excluded",
   "runtime_catalog": "data/prompt_effect_presets.json",
   "summary": {
-    "preset_count": 206,
-    "asset_count": 206,
-    "thumbnail_bytes": 781874,
+    "preset_count": 212,
+    "asset_count": 212,
+    "thumbnail_bytes": 787404,
     "missing_count": 0
   },
   "license": {
@@ -3043,13 +3043,85 @@
       "media_type": "image/webp",
       "origin": "Prompt-Effect-Forge-Neo",
       "generator": "GPT Image"
+    },
+    {
+      "preset_id": "underlight",
+      "preset_name": "Underlight",
+      "target_path": "assets/thumbnails/underlight.webp",
+      "sha256": "70e5eb5a5d935df3dcf1d32608d5a26e73e48669ef988bae27c38d5f9df841a0",
+      "byte_size": 692,
+      "width": 192,
+      "height": 128,
+      "media_type": "image/webp",
+      "origin": "Prompt-Effect-Forge-Neo",
+      "generator": "GPT Image"
+    },
+    {
+      "preset_id": "split_light",
+      "preset_name": "Split Light",
+      "target_path": "assets/thumbnails/split_light.webp",
+      "sha256": "1a9076ab7ba3a7769ddc462b78915f866fdce1f53ef72486ace0f36f76c11725",
+      "byte_size": 674,
+      "width": 192,
+      "height": 128,
+      "media_type": "image/webp",
+      "origin": "Prompt-Effect-Forge-Neo",
+      "generator": "GPT Image"
+    },
+    {
+      "preset_id": "butterfly_light",
+      "preset_name": "Butterfly Light",
+      "target_path": "assets/thumbnails/butterfly_light.webp",
+      "sha256": "90c2bb37f3f56bf6e3456909199395708823611b43864c1bfe5e9731eb41d9f9",
+      "byte_size": 652,
+      "width": 192,
+      "height": 128,
+      "media_type": "image/webp",
+      "origin": "Prompt-Effect-Forge-Neo",
+      "generator": "GPT Image"
+    },
+    {
+      "preset_id": "rembrandt_light",
+      "preset_name": "Rembrandt Light",
+      "target_path": "assets/thumbnails/rembrandt_light.webp",
+      "sha256": "a859acfe6584be91840aed3c9c2b6ecc952fec9b266d52c34d889365405e0550",
+      "byte_size": 784,
+      "width": 192,
+      "height": 128,
+      "media_type": "image/webp",
+      "origin": "Prompt-Effect-Forge-Neo",
+      "generator": "GPT Image"
+    },
+    {
+      "preset_id": "window_frame_light",
+      "preset_name": "Window Frame Light",
+      "target_path": "assets/thumbnails/window_frame_light.webp",
+      "sha256": "a938ee47331fcfe5dcfba84dc4e8b4208df0fedead66706bb8594928ad61a0e2",
+      "byte_size": 1366,
+      "width": 192,
+      "height": 128,
+      "media_type": "image/webp",
+      "origin": "Prompt-Effect-Forge-Neo",
+      "generator": "GPT Image"
+    },
+    {
+      "preset_id": "two_tone_lighting",
+      "preset_name": "Two-Tone Lighting",
+      "target_path": "assets/thumbnails/two_tone_lighting.webp",
+      "sha256": "1a22916b385ef71cbce353e6dbc4728cd7115f63b3d89a7c1cdcb8cc77a11b41",
+      "byte_size": 1362,
+      "width": 192,
+      "height": 128,
+      "media_type": "image/webp",
+      "origin": "Prompt-Effect-Forge-Neo",
+      "generator": "GPT Image"
     }
   ],
   "support_files": [
     {
       "target_path": "data/prompt_effect_presets.json",
-      "sha256": "693075d64340a70d0f4ed1f7e48c3d7b92d06e32bc45651cf5ba03a2f8846cb0",
-      "byte_size": 149070
+      "sha256": "95e299371a2f1002d96db3149be7f3473786fb522e743569064a4e35809e60fd",
+      "byte_size": 152185
     },
     {
       "target_path": "extraction_report.json",

@@ -8,4 +8,4 @@ Original MIT license notices and the Background notice are retained in `provenan
 
 New extension code is licensed under the MIT license in `LICENSE`. The 176 images are selection previews, not generation reference inputs. There is no network download or model-specific prompt conversion at runtime.
 
-The 30 additional Prompt Effect presets have original GPT Image previews encoded as 192 x 128 WebP. Their manifest entries identify the extension as their origin.
+The 36 additional Prompt Effect presets have original GPT Image previews encoded as 192 x 128 WebP. Their manifest entries identify the extension as their origin.

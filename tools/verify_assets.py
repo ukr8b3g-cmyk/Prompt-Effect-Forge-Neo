@@ -5,7 +5,7 @@ import struct
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-CATALOG_SHA256 = "693075d64340a70d0f4ed1f7e48c3d7b92d06e32bc45651cf5ba03a2f8846cb0"
+CATALOG_SHA256 = "95e299371a2f1002d96db3149be7f3473786fb522e743569064a4e35809e60fd"
 
 
 def dimensions(raw):

@@ -2,7 +2,7 @@
 <img width="1808" height="903" alt="Clip_7" src="https://github.com/user-attachments/assets/69b8b2c3-e97b-4936-b534-8fd7a5ca9801" />
 
 
-Krea2 BBOX由来の176件と追加エフェクト30件（見本画像付き）を、Forge Neoで選んでPositiveへ挿入する独立拡張です。元の英語効果文・Boost・画像を保持しています。日本語／英語の表示に対応します。
+Krea2 BBOX由来の176件と追加エフェクト36件（見本画像付き）を、Forge Neoで選んでPositiveへ挿入する独立拡張です。元の英語効果文・Boost・画像を保持しています。日本語／英語の表示に対応します。
 
 ## 導入
 
@@ -69,7 +69,7 @@ node --test tests/core.test.cjs tests/transport.test.cjs tests/library.test.cjs 
 
 ## English
 
-An independent Forge Neo extension containing the original 176 Krea2 Prompt Effect presets and 30 additional effects, each with a preview image. Select an effect, inspect its preview, and explicitly insert it into the txt2img or img2img Positive prompt. It supports a regular tab, side panel and linked browser tab, exclusive Photo/Anime Boost, browser-stored Custom presets, and JSON import/export. With Enable on, Generate adds the selected effect to the submitted Positive prompt for txt2img, img2img and Forge Neo Generation Queue, leaving the input field untouched. Use Insert to place editable text in the prompt field. Generate skips the selected effect when the same text is already in the prompt.
+An independent Forge Neo extension containing the original 176 Krea2 Prompt Effect presets and 36 additional effects, each with a preview image. Select an effect, inspect its preview, and explicitly insert it into the txt2img or img2img Positive prompt. It supports a regular tab, side panel and linked browser tab, exclusive Photo/Anime Boost, browser-stored Custom presets, and JSON import/export. With Enable on, Generate adds the selected effect to the submitted Positive prompt for txt2img, img2img and Forge Neo Generation Queue, leaving the input field untouched. Use Insert to place editable text in the prompt field. Generate skips the selected effect when the same text is already in the prompt.
 
 ### Installation
 
